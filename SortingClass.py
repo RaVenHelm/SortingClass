@@ -228,6 +228,40 @@ class SortingClass:
 			self.quick_sort(values, p + 1, high)
 		return self
 
+	def heap_sort(self, values, count):
+		self.heapify(values, count)
+		end = count - 1
+		while end > 0:
+			values[end], values[0] = values[0], values[end]
+			self.swaps += 1
+			end -= 1
+			self.sift_down(values, 0, end)
+		return self
+
+	def heapify(self, values, count):
+		start = int((count - 2) / 2)
+
+		while start >= 0:
+			self.sift_down(values, start, count - 1)
+			start -= 1
+
+	def sift_down(self, values, start, end):
+		root = start
+
+		while root * 2 + 1 <= end:
+			child = root * 2 + 1
+
+			if child + 1 <= end and values[child] < values[child + 1]:
+				child += 1
+				self.comparisons += 1
+			if values[root] < values[child]:
+				values[root], values[child] = values[child], values[root]
+				self.swaps += 1
+				root = child
+				self.comparisons += 1
+			else:
+				return
+
 	def all(self, orig):
 		values = copy(orig)
 		self.set_defaults()

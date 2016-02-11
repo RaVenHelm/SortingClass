@@ -1,10 +1,10 @@
 import unittest
-import SortingClass
+from SortingClass import *
 
 
 class SortingClassTest(unittest.TestCase):
 	def setUp(self):
-		self.sorter = SortingClass.SortingClass(False)
+		self.sorter = SortingClass(False)
 
 	def test_init_settings(self):
 		self.assertEquals(self.sorter.comparisons, 1, 'set comparisons to 1')

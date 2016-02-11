@@ -23,6 +23,11 @@ def main(arguments):
 	elif func == 'quick':
 		array = copy(a)
 		s.quick_sort(array, 0, len(array) - 1).finish()
+	elif func == 'heap':
+		array = copy(a)
+		print(array)
+		s.heap_sort(array, len(array)).finish()
+		print(array)
 	elif func == 'all':
 		array = copy(a)
 		s.all(array)
