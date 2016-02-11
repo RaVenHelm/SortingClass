@@ -199,6 +199,7 @@ class SortingClass:
 			# print comparison
 			if self.print:
 				SortingUtilClass.print_comparison_simple(self.comparisons)
+				SortingUtilClass.print_comparison_level(values, self.comparisons, 3*(j-1) + 10, [values[j], pivot], j)
 			self.comparisons += 1
 			if values[j] <= pivot:
 				values[i], values[j] = values[j], values[i]
@@ -207,6 +208,8 @@ class SortingClass:
 
 		# swap values
 		values[i], values[high] = values[high], values[i]
+		if self.print:
+			SortingUtilClass.print_swap_level(values, self.swaps, 3*(i-1) + 10, [values[i], values[high]], i)
 		self.swaps += 1
 		return i
 
@@ -228,6 +231,7 @@ class SortingClass:
 			self.quick_sort(values, p + 1, high)
 		return self
 
+	# Heap sort methods (Extra)
 	def heap_sort(self, values, count):
 		self.heapify(values, count)
 		end = count - 1
@@ -286,3 +290,9 @@ class SortingClass:
 		if self.print:
 			SortingUtilClass.print_algorithm_title('Quick Sort')
 		self.quick_sort(values, 0, len(values) - 1).finish()
+
+		values = copy(orig)
+		self.set_defaults()
+		if self.print:
+			SortingUtilClass.print_algorithm_title('Heap Sort')
+		self.heap_sort(values, len(values)).finish()
