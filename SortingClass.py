@@ -1,7 +1,5 @@
 from copy import copy
 
-import random
-
 
 class SortingUtilClass:
 
@@ -21,6 +19,7 @@ class SortingUtilClass:
 		print('\t{0:<12}  {1:>3}'.format('Comarisons:', comparisons))
 		print('\t{0:<12}  {1:>3}'.format('Swaps:', swaps))
 		print('\t{0:<12}  {1:>3}'.format('Work:', comparisons + (5 * swaps)))
+		print()
 
 	@staticmethod
 	def print_title(assign_num, title):
@@ -42,10 +41,21 @@ class SortingUtilClass:
 			print(char, end='')
 		print()
 
+	@staticmethod
+	def print_algorithm_title(title):
+		SortingUtilClass.print_char_line('#')
+		print(title)
+		print()
+
 
 class SortingClass:
 
 	def __init__(self):
+		self.comparisons = 1
+		self.swaps = 1
+		self.level = 1
+
+	def set_defaults(self):
 		self.comparisons = 1
 		self.swaps = 1
 		self.level = 1
@@ -141,22 +151,21 @@ class SortingClass:
 
 	def all(self, orig):
 		values = copy(orig)
-		self.bubble_sort(orig).finish()
+		self.set_defaults()
+		SortingUtilClass.print_algorithm_title('Bubble Sort')
+		self.bubble_sort(values).finish()
 
 		values = copy(orig)
-		self.insertion_sort(orig).finish()
+		self.set_defaults()
+		SortingUtilClass.print_algorithm_title('Insertion Sort')
+		self.insertion_sort(values).finish()
 
 		values = copy(orig)
-		self.selection_sort(orig).finish()
+		self.set_defaults()
+		SortingUtilClass.print_algorithm_title('Selection Sort')
+		self.selection_sort(values).finish()
 
 		values = copy(orig)
-		self.quick_sort(orig, 0, len(values) - 1).finish()
-
-
-s = SortingClass()
-size = 8
-# a = [3, 1, 4, 1, 5, 9, 2, 6]
-a = random.sample(range(1000 * size + 1), size)
-print('Before {}: '.format(a))
-print(s.all(a))
-print('After: {}'.format(a))
+		self.set_defaults()
+		SortingUtilClass.print_algorithm_title('Quick Sort')
+		self.quick_sort(values, 0, len(values) - 1).finish()
