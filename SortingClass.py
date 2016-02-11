@@ -39,7 +39,7 @@ class SortingUtilClass:
 
 	@staticmethod
 	def print_swap_level(array, swap, spacing, print_list, adjust):
-		print('Swap'.format(8), end=' ')
+		print('Swap'.rjust(8), end=' ')
 		print('#{}'.format(swap).ljust(spacing), end='')
 		print('{}'.format(SortingUtilClass.list_to_string(print_list).rjust(adjust)))
 
@@ -106,12 +106,15 @@ class SortingClass:
 		n = len(values)
 		for i in range(n):
 			# print loop level
+			SortingUtilClass.print_loop_position(i+1,values)
 			for j in range(1,n):
 				# print comparison
+				SortingUtilClass.print_comparison_level(values, self.comparisons, 3*(j - 2) + 7, [values[j-1], values[j]], j)
 				self.comparisons += 1
 				if values[j-1] > values[j]:
 					values[j-1], values[j] = values[j], values[j-1]
 					# print swaps
+					SortingUtilClass.print_swap_level(values, self.swaps, 3*(j - 2) + 13, [values[j-1], values[j]], j)
 					self.swaps += 1
 		return self
 
@@ -119,15 +122,20 @@ class SortingClass:
 		n = len(values)
 		for i in range(1,n):
 			j = i
+			SortingUtilClass.print_loop_position(j, values)
 			while j > 0 and values[j-1] > values[j]:
 				# print comparison
+				SortingUtilClass.print_comparison_level(values, self.comparisons, 3*(j - 1) + 4, [values[j-1], values[j]], j)
 				self.comparisons += 1
 				# swap values
 				values[j-1], values[j] = values[j], values[j-1]
+				# print swaps
+				SortingUtilClass.print_swap_level(values, self.swaps, 3*(j - 1) + 10, [values[j-1], values[j]], j)
 				self.swaps += 1
 				j -= 1
 			else:
 				# print comparison
+				SortingUtilClass.print_comparison_level(values, self.comparisons, 3*(j - 1) + 4, [values[j-1], values[j]], j)
 				self.comparisons += 1
 		return self
 

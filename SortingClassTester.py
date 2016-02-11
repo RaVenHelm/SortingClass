@@ -13,13 +13,16 @@ def main(arguments):
 	func = arguments.algorithm
 	if func == 'bubble':
 		array = copy(a)
-		s.bubble_sort(array)
+		s.bubble_sort(array).finish()
 	elif func == 'insertion':
 		array = copy(a)
-		s.insertion_sort(array)
+		s.insertion_sort(array).finish()
 	elif func == 'selection':
 		array = copy(a)
-		s.selection_sort(array)
+		s.selection_sort(array).finish()
+	elif func == 'quick':
+		array = copy(a)
+		s.quick_sort(array, 0, len(array) - 1).finish()
 	elif func == 'all':
 		array = copy(a)
 		s.all(array)
