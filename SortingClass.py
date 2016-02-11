@@ -32,8 +32,45 @@ class SortingUtilClass:
 		print('Loop #{0}    Array = {1}'.format(num, SortingUtilClass.list_to_string(array)))
 
 	@staticmethod
-	def print_comparison_level(array, comparison, spacing):
-		pass
+	def print_comparison_level(array, comparison, spacing, print_list, adjust):
+		print('Comparison'.rjust(14), end=' ')
+		print('#{}'.format(comparison).ljust(spacing), end='')
+		print('{}'.format(SortingUtilClass.list_to_string(print_list)).rjust(adjust))
+
+	@staticmethod
+	def print_swap_level(array, swap, spacing, print_list, adjust):
+		print('Swap'.format(8), end=' ')
+		print('#{}'.format(swap).ljust(spacing), end='')
+		print('{}'.format(SortingUtilClass.list_to_string(print_list).rjust(adjust)))
+
+	@staticmethod
+	def print_pivot_level(pivot):
+		pivot_spaces = 14
+		if (pivot / 10) >= 1:
+			pivot_spaces = 15
+		print('Pivot = {}'.format(pivot).rjust(pivot_spaces))
+
+	@staticmethod
+	def print_level_with_array(level, array):
+		print('Level {}:'.format(level), end='')
+		print('Array = {}'.format(SortingUtilClass.list_to_string(array)).rjust(15 + len(array) * 3))
+
+	@staticmethod
+	def print_high_low(high, low):
+		low_spaces = 12
+		if (low / 10) >= 1:
+			low_spaces = 11
+		print('Low = {}'.format(low).rjust(low_spaces))
+
+		high_spaces = 13
+		if (high / 10) >= 1:
+			high_spaces = 14
+		print('High = {}'.format(high).rjust(high_spaces))
+
+	@staticmethod
+	def print_qs_fn(low, high, index):
+		# TODO: adjust if index +/- 1 is greater than high or low
+		print('Calling QS ({}-{}) and ({}-{})'.format(low, index-1, index+1, high))
 
 	@staticmethod
 	def print_char_line(char):
