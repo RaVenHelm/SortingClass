@@ -38,12 +38,27 @@ class SortingUtilClass:
 		print('{}'.format(SortingUtilClass.list_to_string(print_list)).rjust(adjust))
 
 	@staticmethod
-	def print_comparison_simple(comparison):
+	def print_comparison_simple(comparison, values, low, high):
 		fmt = 'Comparison #{}'.format(comparison)
 		if (comparison / 10) < 1:
-			print(fmt.rjust(18))
+			print(fmt.rjust(18), end='')
 		else:
-			print(fmt.rjust(19))
+			print(fmt.rjust(19), end='')
+
+		base_spaces = 3*low + 6
+
+		print('{}'.format(values[low]).rjust(base_spaces), end='')
+		print('{}'.format(values[high]).rjust(3*(high - low)))
+
+	@staticmethod
+	def print_swap_simple(swap, values, low, high):
+		fmt = 'Swap #{}'.format(swap)
+		if (swap / 10) < 1:
+			print(fmt.rjust(12), end='')
+		else:
+			print(fmt.rjust(13), end='')
+		print('{}'.format(values[low]).rjust(3*low+12), end='')
+		print('{}'.format(values[high]).rjust(3*(high-low)))
 
 	@staticmethod
 	def print_swap_level(array, swap, spacing, print_list, adjust):
@@ -77,8 +92,15 @@ class SortingUtilClass:
 
 	@staticmethod
 	def print_qs_fn(low, high, index):
-		# TODO: adjust if index +/- 1 is greater than high or low
-		print('Calling QS ({}-{}) and ({}-{})'.format(low, index-1, index+1, high))
+		a = low
+		b = index - 1
+		c = index + 1
+		d = high
+		if a > b:
+			a, b = b, a
+		if c > d:
+			c, d = d, c
+		print('Calling QS ({}-{}) and ({}-{})'.format(a, b, c, d))
 
 	@staticmethod
 	def print_char_line(char):
@@ -95,11 +117,11 @@ class SortingUtilClass:
 
 class SortingClass:
 
-	def __init__(self, toPrint=True):
+	def __init__(self, to_print=True):
 		self.comparisons = 1
 		self.swaps = 1
 		self.level = 1
-		self.print = toPrint
+		self.print = to_print
 
 	def set_defaults(self):
 		self.comparisons = 1
@@ -198,18 +220,18 @@ class SortingClass:
 		for j in range(low, high):
 			# print comparison
 			if self.print:
-				SortingUtilClass.print_comparison_simple(self.comparisons)
-				SortingUtilClass.print_comparison_level(values, self.comparisons, 3*(j-1) + 10, [values[j], pivot], j)
+				SortingUtilClass.print_comparison_simple(self.comparisons, values, j, high)
+				# SortingUtilClass.print_comparison_level(values, self.comparisons, 3*(j-1) + 10, [values[j], pivot], j)
 			self.comparisons += 1
 			if values[j] <= pivot:
 				values[i], values[j] = values[j], values[i]
-				self.swaps += 1
 				i += 1
 
 		# swap values
 		values[i], values[high] = values[high], values[i]
 		if self.print:
-			SortingUtilClass.print_swap_level(values, self.swaps, 3*(i-1) + 10, [values[i], values[high]], i)
+			# SortingUtilClass.print_swap_level(values, self.swaps, 3*(i-1) + 10, [values[i], values[high]], i)
+			SortingUtilClass.print_swap_simple(self.swaps, values, i, high)
 		self.swaps += 1
 		return i
 
