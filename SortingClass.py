@@ -47,8 +47,8 @@ class SortingUtilClass:
 
 		base_spaces = 3*low + 6
 
-		print('{}'.format(values[low]).rjust(base_spaces), end='')
-		print('{}'.format(values[high]).rjust(3*(high - low)))
+		print('{}'.format(values[low]).rjust(base_spaces))
+		# print('{}'.format(values[high]).rjust(3*(high - low)))
 
 	@staticmethod
 	def print_swap_simple(swap, values, low, high):

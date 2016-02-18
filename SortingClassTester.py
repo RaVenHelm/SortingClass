@@ -33,8 +33,9 @@ def main(arguments):
 		array = copy(a)
 		s.all(array)
 	else:
-		print('Invalid algorithm')
-		sys.exit(1)
+		array = copy(a)
+		s.quick_sort(array, 0, len(array) - 1).finish()
+		sys.exit(0)
 
 if __name__ == '__main__':
 	parser = ArgumentParser(description='Tester for Assignment #4')
