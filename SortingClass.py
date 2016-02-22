@@ -38,8 +38,11 @@ class SortingUtilClass:
 		print('{}'.format(SortingUtilClass.list_to_string(print_list)).rjust(adjust))
 
 	@staticmethod
-	def print_comparison_simple(comparison, values, low, high):
+	def print_comparison_simple(comparison, values, low, high, **kwargs):
 		fmt = 'Comparison #{}'.format(comparison)
+		end_char = '\n'
+		if kwargs['stop']:
+			end_char = ''
 		if (comparison / 10) < 1:
 			print(fmt.rjust(18), end='')
 		else:
@@ -47,8 +50,9 @@ class SortingUtilClass:
 
 		base_spaces = 3*low + 6
 
-		print('{}'.format(values[low]).rjust(base_spaces))
-		# print('{}'.format(values[high]).rjust(3*(high - low)))
+		print('{}'.format(values[low]).rjust(base_spaces), end=end_char)
+		if kwargs['stop']:
+			print('{}'.format('(Stop)').rjust(8))
 
 	@staticmethod
 	def print_swap_simple(swap, values, low, high):
@@ -220,18 +224,22 @@ class SortingClass:
 		for j in range(low, high):
 			# print comparison
 			if self.print:
-				SortingUtilClass.print_comparison_simple(self.comparisons, values, j, high)
-				# SortingUtilClass.print_comparison_level(values, self.comparisons, 3*(j-1) + 10, [values[j], pivot], j)
+				to_stop = False
+				if values[j] >= pivot:
+					to_stop = True
+				SortingUtilClass.print_comparison_simple(self.comparisons, values, j, high, stop=to_stop)
 			self.comparisons += 1
 			if values[j] <= pivot:
+				if self.print:
+					print('Moving high...')
 				values[i], values[j] = values[j], values[i]
 				i += 1
 
 		# swap values
 		values[i], values[high] = values[high], values[i]
 		if self.print:
-			# SortingUtilClass.print_swap_level(values, self.swaps, 3*(i-1) + 10, [values[i], values[high]], i)
 			SortingUtilClass.print_swap_simple(self.swaps, values, i, high)
+			print('{}'.format('Moving low...').rjust(18))
 		self.swaps += 1
 		return i
 
