@@ -138,6 +138,10 @@ class SortingClass:
 		work = self.comparisons+(5*self.swaps)
 		return dict(comparisons=self.comparisons, swaps=self.swaps, work=work, level=self.level)
 
+	def get_analysis(self):
+		work = self.comparisons + (5*self.swaps)
+		return dict(comparisons=self.comparisons, swaps=self.swaps, work=work)
+
 	def bubble_sort(self, values):
 		n = len(values)
 		for i in range(n):
