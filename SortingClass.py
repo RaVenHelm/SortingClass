@@ -224,7 +224,8 @@ class SortingClass:
 		i = low
 
 		# print pivot
-		SortingUtilClass.print_pivot_level(pivot)
+		if self.print:
+			SortingUtilClass.print_pivot_level(pivot)
 		for j in range(low, high):
 			# print comparison
 			if self.print:
